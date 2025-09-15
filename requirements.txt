@@ -1,0 +1,12 @@
+numpy
+pandas
+face-recognition
+opencv-python
+dlib
+sounddevice
+pyaudio
+pyttsx3
+requests
+flask
+cohere
+pickle-mixin
