@@ -1,0 +1,98 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice-agent",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "84d8bd26-fbed-474d-a48a-404b4ddfcda0",
+      "name": "Webhook",
+      "webhookId": "eaebaabe-04f1-4d67-b9f5-a4ec48b6cdaf"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1cf9ccaf-0fc9-438a-824d-27aa42ba9d89",
+              "name": "answer",
+              "value": "=You said: {{$json[\"message\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        0
+      ],
+      "id": "e2256c88-468f-474a-9929-dc2a9309f682",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:5000/reply",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{ \"answer\": \"{{$json.answer}}\" }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        832,
+        0
+      ],
+      "id": "53a7b548-106c-4b42-857e-999ca45fd9f7",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8e5994f8-2d70-4a16-9316-364b34f18f30",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dcaba361b582642678ff4f96e322571da521b30fc33f16a9af0db10673ecd3d0"
+  },
+  "id": "hR6YwBjBC855ae59",
+  "tags": []
+}
